@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>GuacPlayer - CAIXA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Variáveis e Reset Básico --- */
+        :root {
+            --cor-primaria-escura: #1a237e; /* Azul Escuro CAIXA */
+            --cor-secundaria-clara: #f0f4f8; /* Fundo levemente cinza */
+            --cor-texto: #333;
+            --cor-sucesso: #28a745;
+            --cor-alerta: #FF8200; /* Laranja institucional para avisos */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-secundaria-clara);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header Sólido (Padrão 100% Horizontal) --- */
+        .header-bloco {
+            background-color: var(--cor-primaria-escura);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            width: 100vw;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-header {
+            max-width: 80px;
+            height: auto;
+        }
+
+        .titulo-header {
+            color: #ffffff;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0 0 0 15px;
+        }
+
+        /* --- Área de Login Centralizada --- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .login-dialog {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 100%;
+            padding: 35px;
+            box-sizing: border-box;
+        }
+
+        .login-dialog h1 {
+            color: var(--cor-primaria-escura);
+            text-align: center;
+            margin: 0 0 10px;
+            font-size: 1.6em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        /* --- Formulário --- */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-field {
+            background: #fff;
+            color: var(--cor-texto);
+            border: 1px solid #c5cae9;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .login-field:focus {
+            border-color: var(--cor-primaria-escura);
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .button.login {
+            background: var(--cor-primaria-escura);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .button.login:hover {
+            background: #0d1642;
+        }
+
+        .link {
+            text-align: center;
+            font-size: .85rem;
+            color: var(--cor-primaria-escura);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Aviso Institucional --- */
+        .caixa-notice {
+            margin-top: 25px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: #fff3e0; /* Laranja muito claro */
+            border: 1px solid rgba(255,130,0,.35);
+            color: #855000;
+            font-size: .88rem;
+            line-height: 1.4;
+        }
+
+        .caixa-notice a {
+            color: var(--cor-primaria-escura);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        footer.demo-note {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-size: .85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bloco">
+        <div class="header-content">
+            <img src="assets/img/CAIXA_elemento_cor_chapado_positivo.png" alt="CAIXA" class="logo-header">
+            <h1 class="titulo-header">GuacPlayer</h1>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="login-dialog">
+            <h1>GuacPlayer - CAIXA</h1>
+            <p class="subtitle">Faça login para continuar no ambiente corporativo</p>
+
+            <form class="form" onsubmit="return false;">
+                <input class="login-field" type="text" placeholder="Usuário (ex: c123456)">
+                <input class="login-field" type="password" placeholder="Senha">
+                
+                <div class="buttons">
+                    <button class="button login">Entrar</button>
+                    <a class="link" href="#">Esqueceu a senha?</a>
+                </div>
+            </form>
+
+            <div class="caixa-notice">
+                ⚠️ <strong>Aviso:</strong> Ambiente corporativo da <strong>Caixa Econômica Federal</strong>.  
+                Uso autorizado somente para pessoas credenciadas.  
+                Dúvidas: <a href="mailto:ceaus02@caixa.gov.br">ceaus02@caixa.gov.br</a>. [cite: 16]
+            </div>
+        </div>
+    </div>
+
+    <footer class="demo-note">
+        Ambiente Oficial de Canais — Acesso Restrito. [cite: 17]
+    </footer>
+
+</body>
+</html>
