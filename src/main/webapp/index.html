@@ -20,13 +20,14 @@
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    THE SOFTWARE.
 -->
-<html lang="en"
+<html lang="pt-BR"
       ng-app="app"
       ng-controller="appController">
 
     <head>
-        <title>Glyptodon Enterprise - Session Recording Player</title>
+        <title>GuacPlayer - CAIXA</title>
         <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
         <meta http-equiv="x-ua-compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="mobile-web-app-capable" content="yes">
@@ -57,20 +58,18 @@
             <glen-file-chooser file="selectedRecording">
                 <div class="glen-welcome" ng-hide="selectedRecording || error">
                     <h1>
-                        <img src="images/glyptodon.png" alt=".:_>">
-                        <span class="glyptodon">Glyptodon</span> Enterprise
+                        <img src="assets/img/CAIXA_elemento_cor_chapado_positivo.png" alt="CAIXA" style="max-height: 80px;">
+                        <span class="glyptodon">GuacPlayer</span> CAIXA
                     </h1>
-                    <h2>Session Recording Player</h2>
+                    <h2>Reprodutor de Sessões Gravadas</h2>
                 </div>
                 <p class="glen-player-help-no-recording"
-                   ng-hide="selectedRecording || error">No session recording is
-                currently open. Please select a recording to view.</p>
+                   ng-hide="selectedRecording || error">Nenhuma gravação de sessão está aberta no momento. Por favor, selecione uma gravação para visualizar.</p>
                 <p class="glen-player-help-recording-error"
                    ng-hide="selectedRecording || !error"><i class="fas fa-exclamation-triangle"></i>
-                The selected recording cannot be played. The recording may be
-                corrupt, or you may not have permission to read the recording.
-                Please select a different recording.</p>
-                <span class="glen-player-button">Browse...</span>
+                A gravação selecionada não pode ser reproduzida. A gravação pode estar corrompida ou você pode não ter permissão para lê-la.
+                Por favor, selecione uma gravação diferente.</p>
+                <span class="glen-player-button">Procurar...</span>
             </glen-file-chooser>
         </div>
         <!-- Container Caixa -->

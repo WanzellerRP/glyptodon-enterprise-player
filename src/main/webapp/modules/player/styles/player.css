@@ -54,11 +54,13 @@ glen-player .glen-player-controls {
     border: none;
     width: 2em;
     height: 2em;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .glen-player-controls .glen-player-play:hover,
 .glen-player-controls .glen-player-pause:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 glen-player .glen-player-status {
@@ -69,7 +71,9 @@ glen-player .glen-player-status {
     width: 100%;
     height: 100%;
 
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(26, 35, 126, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     z-index: 1;
 
     display: -webkit-box;

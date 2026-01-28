@@ -1,0 +1,231 @@
+/*
+ * Customização CAIXA - GuacPlayer
+ * Baseado no padrão visual do teste.html
+ */
+
+/* ========================================
+   CAMADA 1: VARIÁVEIS DE CORES
+   ======================================== */
+:root {
+    /* Cores Primárias CAIXA */
+    --cor-primaria-escura: #1a237e;     /* Azul Escuro CAIXA */
+    --cor-primaria-hover: #0d1642;      /* Azul mais escuro para hover */
+    --cor-secundaria-clara: #f0f4f8;    /* Fundo levemente cinza */
+    --cor-texto: #333;
+    --cor-sucesso: #28a745;
+    --cor-alerta: #FF8200;              /* Laranja institucional */
+    
+    /* Cores Alternativas */
+    --caixa-azul: #004F9F;
+    --caixa-azul-escuro: #164194;
+    --caixa-laranja: #EF7D00;
+    --caixa-cinza: #F5F6F8;
+    
+    /* Transparências */
+    --overlay-escuro: rgba(26, 35, 126, 0.85);
+    --overlay-claro: rgba(26, 35, 126, 0.5);
+    --borda-semi: rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   CAMADA 2: RESET DE COMPONENTES
+   ======================================== */
+
+/* Tipografia Global */
+body, .glen-player-app {
+    font-family: 'Poppins', 'Source Sans Pro', sans-serif !important;
+}
+
+/* Background Principal */
+.glen-player-app {
+    background: var(--cor-secundaria-clara) !important;
+}
+
+/* Botões */
+.glen-player-app .glen-player-button {
+    border: 2px solid var(--cor-primaria-escura) !important;
+    border-radius: 10px !important;
+    background: var(--cor-primaria-escura) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 0.75em 1.5em !important;
+    transition: all 0.3s ease !important;
+}
+
+.glen-player-app .glen-player-button:hover {
+    background: var(--cor-primaria-hover) !important;
+    border-color: var(--cor-primaria-hover) !important;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3) !important;
+}
+
+/* Campos de Input (se houver) */
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+    background: #fff !important;
+    color: var(--cor-texto) !important;
+    border: 1px solid #c5cae9 !important;
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+    border-color: var(--cor-primaria-escura) !important;
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1) !important;
+    outline: none !important;
+}
+
+/* ========================================
+   CAMADA 3: LAYOUT E GLASSMORPHISM
+   ======================================== */
+
+/* Overlays e Controles */
+.glen-player-app .glen-player-recording-selector,
+.glen-player-app .glen-player-controls {
+    background: var(--overlay-claro) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+}
+
+/* Status e Mensagens */
+.glen-player-app .glen-player-status {
+    background: var(--overlay-escuro) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* Textos e Títulos */
+.glen-player-app .glen-player-selected-file {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.glen-player-app .glen-player-help-no-recording,
+.glen-player-app .glen-player-help-recording-error {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--cor-texto);
+}
+
+/* Welcome Screen */
+.glen-welcome {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    margin: 20px;
+}
+
+.glen-welcome h1,
+.glen-welcome h2 {
+    color: var(--cor-primaria-escura) !important;
+    font-weight: 700 !important;
+}
+
+.glen-welcome h2 {
+    border-left: 3px solid var(--cor-alerta) !important;
+    padding-left: 12px !important;
+}
+
+/* Controles do Player */
+.glen-player-controls .glen-player-play,
+.glen-player-controls .glen-player-pause {
+    color: white !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease !important;
+}
+
+.glen-player-controls .glen-player-play:hover,
+.glen-player-controls .glen-player-pause:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ========================================
+   CUSTOMIZAÇÕES ESPECÍFICAS
+   ======================================== */
+
+/* Container Glass (se existir) */
+.glass-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--borda-semi);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Ícones FontAwesome */
+.fas, .far, .fab {
+    color: var(--cor-primaria-escura);
+}
+
+.glen-player-recording-selector .fas {
+    color: white;
+}
+
+/* Mensagens de Erro */
+.glen-player-help-recording-error {
+    border-left: 4px solid var(--cor-alerta);
+}
+
+.glen-player-help-recording-error .fas {
+    color: var(--cor-alerta);
+}
+
+/* Seek Bar e Progress */
+.glen-player-seek {
+    border-radius: 10px;
+}
+
+/* Animações Suaves */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media (max-width: 768px) {
+    .glen-welcome {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .glen-player-app .glen-player-button {
+        padding: 0.6em 1.2em !important;
+        font-size: 0.9em;
+    }
+}
+
+/* ========================================
+   HEADER CUSTOMIZADO (OPCIONAL)
+   ======================================== */
+.header-caixa {
+    background-color: var(--cor-primaria-escura);
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-caixa img {
+    max-height: 60px;
+    height: auto;
+}
+
+.header-caixa h1 {
+    color: white;
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0;
+}

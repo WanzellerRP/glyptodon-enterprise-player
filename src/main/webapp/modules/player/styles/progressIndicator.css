@@ -50,6 +50,7 @@ glen-player-progress-indicator {
 glen-player-progress-indicator .glen-player-progress-text {
     font-size: 2em;
     font-weight: bold;
+    color: white;
 }
 
 glen-player-progress-indicator .glen-player-progress-bar-container {
@@ -80,7 +81,7 @@ glen-player-progress-indicator .glen-player-progress-bar {
     -moz-border-radius: 128px;
     border-radius: 128px;
 
-    border: 12px solid #5AF;
+    border: 12px solid #FF8200;
     border-bottom-color: transparent;
     border-right-color: transparent;
 
