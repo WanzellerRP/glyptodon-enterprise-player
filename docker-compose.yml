@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  guacplayer-caixa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: guacplayer-caixa
+    image: guacplayer-caixa:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    volumes:
+      # Logs do Nginx (opcional)
+      - ./logs:/var/log/nginx
+    environment:
+      - TZ=America/Sao_Paulo
+    labels:
+      - "com.guacplayer.description=GuacPlayer com padrão visual CAIXA"
+      - "com.guacplayer.version=1.1.0-caixa"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: guacplayer-network
