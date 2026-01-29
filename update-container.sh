@@ -17,6 +17,41 @@ IMAGE_NAME="${IMAGE_NAME:-guacplayer-caixa}"
 IMAGE_TAG="${IMAGE_TAG:-latest}"
 PORT="${PORT:-80}"
 BACKUP_ENABLED="${BACKUP_ENABLED:-true}"
+SKIP_MAVEN="false"
+MAVEN_OFFLINE="false"
+
+# Processar argumentos de linha de comando
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --skip-maven)
+            SKIP_MAVEN="true"
+            shift
+            ;;
+        --offline|-o)
+            MAVEN_OFFLINE="true"
+            shift
+            ;;
+        --help|-h)
+            echo "Uso: $0 [OPÇÕES]"
+            echo ""
+            echo "Opções:"
+            echo "  --skip-maven    Pular compilação Maven (usar build existente)"
+            echo "  --offline, -o   Executar Maven em modo offline (sem downloads)"
+            echo "  --help, -h      Mostrar esta ajuda"
+            echo ""
+            echo "Exemplos:"
+            echo "  $0                    # Build completo normal"
+            echo "  $0 --skip-maven       # Pular Maven, usar build existente"
+            echo "  $0 --offline          # Maven em modo offline"
+            exit 0
+            ;;
+        *)
+            echo "Opção desconhecida: $1"
+            echo "Use --help para ver as opções disponíveis"
+            exit 1
+            ;;
+    esac
+done
 
 # Cores para output
 RED='\033[0;31m'
@@ -128,10 +163,47 @@ update_code() {
 
 # Compilar projeto com Maven
 build_project() {
+    # Verificar se deve pular Maven
+    if [ "$SKIP_MAVEN" = "true" ]; then
+        print_warning "Pulando compilação Maven (--skip-maven)"
+        print_info "Verificando se existe build anterior..."
+        
+        if [ -f "target/glyptodon-enterprise-player-1.1.0-1.tar.gz" ]; then
+            print_success "Build anterior encontrado"
+            
+            # Extrair build existente
+            print_info "Extraindo build..."
+            cd target
+            tar -xzf glyptodon-enterprise-player-*.tar.gz 2>/dev/null
+            cd ..
+            
+            # Substituir logo
+            print_info "Substituindo logo antigo pelo logo CAIXA..."
+            if [ -f "target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png" ]; then
+                cp target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png \
+                   target/glyptodon-enterprise-player-1.1.0-1/images/glen-icon-small.png
+                print_success "Logo substituído"
+            fi
+            
+            return 0
+        else
+            print_error "Build anterior não encontrado em target/"
+            print_info "Execute sem --skip-maven ou compile manualmente"
+            return 1
+        fi
+    fi
+    
     if check_maven; then
         print_info "Compilando projeto com Maven..."
         
-        mvn clean package -DskipTests
+        # Adicionar flag offline se necessário
+        MAVEN_FLAGS="clean package -DskipTests"
+        if [ "$MAVEN_OFFLINE" = "true" ]; then
+            print_info "Modo offline ativado (-o)"
+            MAVEN_FLAGS="$MAVEN_FLAGS -o"
+        fi
+        
+        mvn $MAVEN_FLAGS
         
         if [ $? -eq 0 ]; then
             print_success "Projeto compilado com sucesso"
