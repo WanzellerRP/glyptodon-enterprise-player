@@ -42,6 +42,13 @@ fi
 echo -e "${GREEN}✅ Container encontrado: $CONTAINER_NAME${NC}"
 echo ""
 
+# Criar diretórios necessários no container
+echo -e "${BLUE}📁 Criando diretórios necessários...${NC}"
+docker exec "$CONTAINER_NAME" mkdir -p "$BASE_PATH/assets/img" 2>/dev/null
+docker exec "$CONTAINER_NAME" mkdir -p "$BASE_PATH/images" 2>/dev/null
+echo -e "${GREEN}   ✅ Diretórios criados${NC}"
+echo ""
+
 # Função para copiar arquivo
 copy_file() {
     local src=$1
@@ -84,6 +91,10 @@ echo ""
 echo -e "${BLUE}🖼️  Copiando imagens...${NC}"
 copy_file "src/main/webapp/assets/img/CAIXA_elemento_cor_chapado_positivo.png" "$BASE_PATH/assets/img/CAIXA_elemento_cor_chapado_positivo.png"
 copy_file "src/main/webapp/assets/img/logo-caixa.png" "$BASE_PATH/assets/img/logo-caixa.png"
+
+# Substituir logo antigo pelo logo CAIXA
+echo -e "${BLUE}🔄 Substituindo logo antigo pelo logo CAIXA...${NC}"
+copy_file "src/main/webapp/assets/img/logo-caixa.png" "$BASE_PATH/images/glen-icon-small.png"
 
 # Recarregar Nginx
 echo ""

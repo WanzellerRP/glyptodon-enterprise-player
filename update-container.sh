@@ -136,11 +136,21 @@ build_project() {
         if [ $? -eq 0 ]; then
             print_success "Projeto compilado com sucesso"
             
-            # Extrair build
-            print_info "Extraindo build..."
-            cd target
-            tar -xzf glyptodon-enterprise-player-*.tar.gz 2>/dev/null
-            cd ..
+    # Extrair build
+    print_info "Extraindo build..."
+    cd target
+    tar -xzf glyptodon-enterprise-player-*.tar.gz 2>/dev/null
+    cd ..
+    
+    # Substituir logo antigo pelo logo CAIXA
+    print_info "Substituindo logo antigo pelo logo CAIXA..."
+    if [ -f "target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png" ]; then
+        cp target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png \
+           target/glyptodon-enterprise-player-1.1.0-1/images/glen-icon-small.png
+        print_success "Logo substituído"
+    else
+        print_warning "Logo CAIXA não encontrado, mantendo logo original"
+    fi
             
             if [ $? -eq 0 ]; then
                 print_success "Build extraído"
