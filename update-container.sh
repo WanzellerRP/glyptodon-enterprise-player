@@ -214,6 +214,17 @@ build_project() {
                 print_success "Logo substituído"
             fi
             
+            # Mover diretório para a raiz (onde o Dockerfile espera)
+            print_info "Preparando diretório para Docker build..."
+            rm -rf glyptodon-enterprise-player-1.1.0-1 2>/dev/null
+            mv target/glyptodon-enterprise-player-1.1.0-1 . 2>/dev/null
+            if [ -d "glyptodon-enterprise-player-1.1.0-1" ]; then
+                print_success "Diretório movido para raiz do projeto"
+            else
+                print_error "Erro ao mover diretório"
+                return 1
+            fi
+            
             return 0
         else
             print_error "Build anterior não encontrado em target/"
@@ -281,9 +292,20 @@ build_project() {
     else
         print_warning "Logo CAIXA não encontrado, mantendo logo original"
     fi
+    
+    # Mover diretório para a raiz (onde o Dockerfile espera)
+    print_info "Preparando diretório para Docker build..."
+    rm -rf glyptodon-enterprise-player-1.1.0-1 2>/dev/null
+    mv target/glyptodon-enterprise-player-1.1.0-1 . 2>/dev/null
+    if [ -d "glyptodon-enterprise-player-1.1.0-1" ]; then
+        print_success "Diretório movido para raiz do projeto"
+    else
+        print_error "Erro ao mover diretório"
+        return 1
+    fi
             
             if [ $? -eq 0 ]; then
-                print_success "Build extraído"
+                print_success "Build preparado"
                 return 0
             else
                 print_error "Erro ao extrair build"
