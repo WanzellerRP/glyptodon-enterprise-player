@@ -177,10 +177,39 @@ build_project() {
             tar -xzf glyptodon-enterprise-player-*.tar.gz 2>/dev/null
             cd ..
             
+            # Aplicar alterações visuais CAIXA
+            print_info "Aplicando alterações visuais CAIXA..."
+            
+            # Copiar custom.css
+            if [ -f "src/main/webapp/custom.css" ]; then
+                cp src/main/webapp/custom.css target/glyptodon-enterprise-player-1.1.0-1/custom.css
+                print_success "custom.css copiado"
+            fi
+            
+            # Copiar index.html atualizado
+            if [ -f "src/main/webapp/index.html" ]; then
+                cp src/main/webapp/index.html target/glyptodon-enterprise-player-1.1.0-1/index.html
+                print_success "index.html copiado"
+            fi
+            
+            # Copiar arquivos CSS dos módulos
+            if [ -d "src/main/webapp/modules" ]; then
+                cp -r src/main/webapp/modules/app/styles/*.css target/glyptodon-enterprise-player-1.1.0-1/modules/app/styles/ 2>/dev/null
+                cp -r src/main/webapp/modules/player/styles/*.css target/glyptodon-enterprise-player-1.1.0-1/modules/player/styles/ 2>/dev/null
+                print_success "Arquivos CSS dos módulos copiados"
+            fi
+            
+            # Copiar imagens CAIXA
+            if [ -d "src/main/webapp/assets/img" ]; then
+                mkdir -p target/glyptodon-enterprise-player-1.1.0-1/assets/img
+                cp src/main/webapp/assets/img/*.png target/glyptodon-enterprise-player-1.1.0-1/assets/img/ 2>/dev/null
+                print_success "Imagens CAIXA copiadas"
+            fi
+            
             # Substituir logo
             print_info "Substituindo logo antigo pelo logo CAIXA..."
             if [ -f "target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png" ]; then
-                cp target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png \
+                cp target/glyptodon-enterprise-player-1.1.0-1/assets/img/logo-caixa.png \\
                    target/glyptodon-enterprise-player-1.1.0-1/images/glen-icon-small.png
                 print_success "Logo substituído"
             fi
@@ -213,6 +242,35 @@ build_project() {
     cd target
     tar -xzf glyptodon-enterprise-player-*.tar.gz 2>/dev/null
     cd ..
+    
+    # Forçar cópia dos arquivos CSS atualizados
+    print_info "Aplicando alterações visuais CAIXA..."
+    
+    # Copiar custom.css
+    if [ -f "src/main/webapp/custom.css" ]; then
+        cp src/main/webapp/custom.css target/glyptodon-enterprise-player-1.1.0-1/custom.css
+        print_success "custom.css copiado"
+    fi
+    
+    # Copiar index.html atualizado
+    if [ -f "src/main/webapp/index.html" ]; then
+        cp src/main/webapp/index.html target/glyptodon-enterprise-player-1.1.0-1/index.html
+        print_success "index.html copiado"
+    fi
+    
+    # Copiar arquivos CSS dos módulos
+    if [ -d "src/main/webapp/modules" ]; then
+        cp -r src/main/webapp/modules/app/styles/*.css target/glyptodon-enterprise-player-1.1.0-1/modules/app/styles/ 2>/dev/null
+        cp -r src/main/webapp/modules/player/styles/*.css target/glyptodon-enterprise-player-1.1.0-1/modules/player/styles/ 2>/dev/null
+        print_success "Arquivos CSS dos módulos copiados"
+    fi
+    
+    # Copiar imagens CAIXA
+    if [ -d "src/main/webapp/assets/img" ]; then
+        mkdir -p target/glyptodon-enterprise-player-1.1.0-1/assets/img
+        cp src/main/webapp/assets/img/*.png target/glyptodon-enterprise-player-1.1.0-1/assets/img/ 2>/dev/null
+        print_success "Imagens CAIXA copiadas"
+    fi
     
     # Substituir logo antigo pelo logo CAIXA
     print_info "Substituindo logo antigo pelo logo CAIXA..."
